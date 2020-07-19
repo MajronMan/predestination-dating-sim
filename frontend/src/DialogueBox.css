@@ -1,0 +1,10 @@
+.container {
+    grid-area: dialogues;
+    background-color: black;
+    color: white;
+}
+
+.answers {
+    text-align: left;
+    color: blue
+}

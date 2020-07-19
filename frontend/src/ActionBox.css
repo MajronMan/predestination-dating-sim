@@ -1,0 +1,12 @@
+.box {
+    background-color: grey;
+    border: 15px solid greenyellow;
+    grid-area: other;
+    display: flex;
+}
+
+.actionIcon{
+    background-color: 'transparent';
+    max-width: 300px;
+    max-height: 300px;
+}

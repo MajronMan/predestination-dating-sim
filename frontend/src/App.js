@@ -1,93 +1,109 @@
-import React from 'react';
-import './App.css';
-import { FirebaseContext } from './Firebase';
+import React from "react";
+import "./App.css";
+import { FirebaseContext } from "./Firebase";
+import GameView from "./GameView.js";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 async function callHello() {
-  return fetch(`${backendUrl}/api/v1/hello`).then(response => {
+  return fetch(`${backendUrl}/api/v1/hello`).then((response) => {
     if (!response.ok) {
-      throw new Error(response.statusText)
+      throw new Error(response.statusText);
     }
     return response.json();
-  })
-}
-
-async function testServer() {
-  callHello().then(({ result }) => {
-    const el = document.getElementById("serverResponse")
-    if (el) {
-      el.innerText = result
-      el.style.color = ""
-    }
-  }).catch(() => {
-    const el = document.getElementById("serverResponse")
-    if (el) {
-      el.innerText = "ERROR"
-      el.style.color = "red"
-    }
   });
 }
 
-
-
-const testFirebase = (storageRef) => () => {
-  callFirebase(storageRef)
-}
-
-async function callFirebase(storageRef) {
-  storageRef.child('hello.txt').getDownloadURL()
-    .then((url) => fetch(url).then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      } 
-      return response.text();
-    })).then(
-      result => {
-        const el = document.getElementById("firebaseResponse")
-        if (el) {
-          el.innerText = result
-        }
-      }
-    ).catch(() => {
-      const el = document.getElementById("firebaseResponse")
+async function testServer() {
+  callHello()
+    .then(({ result }) => {
+      const el = document.getElementById("serverResponse");
       if (el) {
-        el.innerText = "ERROR"
-        el.style.color = "red"
+        el.innerText = result;
+        el.style.color = "";
+      }
+    })
+    .catch(() => {
+      const el = document.getElementById("serverResponse");
+      if (el) {
+        el.innerText = "ERROR";
+        el.style.color = "red";
       }
     });
+}
 
+const testFirebase = (storageRef) => () => {
+  callFirebase(storageRef);
+};
+
+const goToGameView = () => {};
+
+async function callFirebase(storageRef) {
+  storageRef
+    .child("hello.txt")
+    .getDownloadURL()
+    .then((url) =>
+      fetch(url).then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.text();
+      })
+    )
+    .then((result) => {
+      const el = document.getElementById("firebaseResponse");
+      if (el) {
+        el.innerText = result;
+      }
+    })
+    .catch(() => {
+      const el = document.getElementById("firebaseResponse");
+      if (el) {
+        el.innerText = "ERROR";
+        el.style.color = "red";
+      }
+    });
 }
 
 const FirebaseEnabledComponent = () => (
   <FirebaseContext.Consumer>
-    {firebase => {
-      return <div>
-        Test connection to firebase
-      <div>
-          <button onClick={testFirebase(firebase.storage.ref())}>TEST</button>
-          <p id="firebaseResponse"></p>
+    {(firebase) => {
+      return (
+        <div>
+          Test connection to firebase
+          <div>
+            <button onClick={testFirebase(firebase.storage.ref())}>TEST</button>
+            <p id="firebaseResponse"></p>
+          </div>
         </div>
-      </div>;
+      );
     }}
   </FirebaseContext.Consumer>
 );
 
-
-const App = () => { 
-  return <div className="App">
-    <header className="App-header">
-      <div>
-        Test connection to server
-          <div>
-          <button onClick={testServer}>TEST</button>
-          <p id="serverResponse"></p>
-        </div>
-      </div>
-
-      <FirebaseEnabledComponent />
-    </header>
-  </div>
-}
+const App = () => {
+  return (
+    <div className="App">
+      <GameView />
+    </div>
+  );
+  //   <header className="App-header">
+  //   <div>
+  //       Start Game
+  //         <div>
+  //         <button onClick={e => console.log(e.target)}>START</button>
+  //       </div>
+  //     </div>
+  //     <div>
+  //       Test connection to server
+  //         <div>
+  //         <button onClick={testServer}>TEST</button>
+  //         <p id="serverResponse"></p>
+  //       </div>
+  //     </div>
+  //     <FirebaseEnabledComponent />
+  //   </header>
+  // </div>
+};
 
 export default App;
