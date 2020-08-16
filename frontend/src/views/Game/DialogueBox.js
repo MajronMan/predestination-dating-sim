@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "./DialogueBox.css";
 
 const currentDialogue = {
@@ -12,13 +11,13 @@ class DialogueBox extends React.Component {
     return (
       <div className="container">
         <p>{currentDialogue.question}</p>
-        <div className = "answers">
-          {currentDialogue.answers.map((a) => (
-            <p>{">" + a}</p>
+        <div className="answers">
+          {currentDialogue.answers.map((a, i) => (
+            <p key={`dialogue_option_${i}`}>{">" + a}</p>
           ))}
         </div>
       </div>
-    );  
+    );
   }
 }
 

@@ -23,6 +23,7 @@ notFound = Wai.responseBuilder H.status404 [] mempty
 handleApi req = 
   case Wai.pathInfo req of
     _ : _ : ["hello"] -> Wai.responseBuilder H.status200 (corsHeaders <> [("Content-Type", "application/json")]) $ byteString "{\"result\": \"hello world\"}"
+    _ : _ : ["krzysiu"] -> Wai.responseBuilder H.status201 (corsHeaders <> [("Content-Type", "application/json")]) $ byteString "{\"result\": \"lubię cycki\"}"
     _ -> notFound
 
 corsHeaders :: H.ResponseHeaders
