@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"; 
 
 import { FirebaseContext } from "../Firebase";
+import TopBar from "../elements/TopBar";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -80,20 +80,8 @@ const FirebaseEnabledComponent = () => (
 );
 
 const Home = () => (
-  <header className="App-header">
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/game">Start Game</Link>
-          </li>
-
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <div className="Home">
+    <TopBar />
     <div>
       Test connection to server
       <div>
@@ -102,7 +90,7 @@ const Home = () => (
       </div>
     </div>
     <FirebaseEnabledComponent />
-  </header>
+  </div>
 );
 
 export default Home;

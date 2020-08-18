@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
+import { userLogin, userLogout } from "../store/actions";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,30 +13,31 @@ const config = {
 };
 
 class Firebase {
-  constructor() {
+  constructor(reduxStore) {
     firebase.initializeApp(config);
 
     this.storage = firebase.storage();
+    this.reduxStore = reduxStore;
 
     firebase.auth().useDeviceLanguage();
     this.googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.handleLogin(user)
+        this.handleLogin(user);
       } else {
-        this.handleLogout()
+        this.handleLogout();
       }
     });
   }
 
-  handleLogin = user => {
-    console.log(user)
-  }
+  handleLogin = (user) => {
+    this.reduxStore.dispatch(userLogin(user));
+  };
 
   handleLogout = () => {
-    console.log("logout")
-  }
+    this.reduxStore.dispatch(userLogout())
+  };
 
   googleLogin = () => {
     firebase
@@ -62,30 +64,14 @@ class Firebase {
       });
   };
 
-  register = (email, password) => {
+  register = (email, password, handle) =>
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ...
-      });
-  };
+      .catch(handle);
 
-  login = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ...
-      });
+  login = (email, password, handle) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(handle);
   };
 }
 

@@ -1,0 +1,13 @@
+.TopBar {
+  width: 100%;
+  background: #E89EB5;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.TopBarLinks {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}

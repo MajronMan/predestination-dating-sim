@@ -1,16 +1,16 @@
 import React from "react";
 
-import './Form.css'
+import "./Form.css";
 
 class LoginForm extends React.Component {
-  state = { email: "", password: "" };
+  state = { email: "", password: "", error: null };
   login = (e) => {
     e.preventDefault();
-    const { email, password } = this.state;
-    console.log("aaaa", email, password);
-    this.props.action(email, password);
+    const { email, password } = this.state; 
+    this.props.action(email, password, (error) => this.setState({ error }));
   };
   render() {
+    const { error } = this.state;
     return (
       <div className="LoginForm">
         <input
@@ -24,11 +24,10 @@ class LoginForm extends React.Component {
           }
         ></input>
         <button onClick={this.login}>{this.props.buttonHint || "Login"}</button>
+        {error && <span className="LoginFormError">{error.message}</span>}
       </div>
     );
   }
 }
 
-
-
-export default LoginForm
+export default LoginForm;
