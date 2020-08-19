@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GameView from "./views/Game";
 import HomeView from "./views/Home";
 import LoginView from "./views/Login";
-import "./App.css";
+import "./App.scss";
 
 const App = () => {
   return (

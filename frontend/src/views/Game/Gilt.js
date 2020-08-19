@@ -1,6 +1,6 @@
 import React from "react";
 import locha_source from "../../assets/locha1.jpg";
-import "./Gilt.css";
+import "./Gilt.scss";
 
 class Gilt extends React.Component {
   render() {

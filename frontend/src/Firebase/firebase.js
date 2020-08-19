@@ -36,7 +36,7 @@ class Firebase {
   };
 
   handleLogout = () => {
-    this.reduxStore.dispatch(userLogout())
+    this.reduxStore.dispatch(userLogout());
   };
 
   googleLogin = () => {
@@ -72,6 +72,10 @@ class Firebase {
 
   login = (email, password, handle) => {
     firebase.auth().signInWithEmailAndPassword(email, password).catch(handle);
+  };
+
+  logout = () => {
+    firebase.auth().signOut();
   };
 }
 

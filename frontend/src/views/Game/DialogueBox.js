@@ -1,5 +1,5 @@
 import React from "react";
-import "./DialogueBox.css";
+import "./DialogueBox.scss";
 
 const currentDialogue = {
   question: "are you dumb, stupid or dumb?",

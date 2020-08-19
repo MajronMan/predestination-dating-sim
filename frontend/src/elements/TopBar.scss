@@ -1,0 +1,15 @@
+@import "../mixins/palette.scss";
+
+.TopBar {
+  width: 100%;
+  background: $secondary;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+
+  &Links {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+  }
+}

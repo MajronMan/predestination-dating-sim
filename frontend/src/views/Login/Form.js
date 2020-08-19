@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Form.css";
+import "./Form.scss";
 
 class LoginForm extends React.Component {
   state = { email: "", password: "", error: null };

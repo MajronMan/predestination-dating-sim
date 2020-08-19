@@ -1,5 +1,5 @@
 import React from "react";
-import "./ActionBox.css";
+import "./ActionBox.scss";
 import itemIcon from "../../assets/pouchIcon.png";
 import fightIcon from "../../assets/fightIcon.png";
 import timeIcon from "../../assets/hourglassIcon.png";
