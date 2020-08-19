@@ -1,10 +1,12 @@
+@import "../../mixins/palette.scss";
+
 .container {
-    grid-area: dialogues;
-    background-color: black;
-    color: white;
+  grid-area: dialogues;
+  background-color: $black;
+  color: $white;
 }
 
 .answers {
-    text-align: left;
-    color: blue
+  text-align: left;
+  color: blue;
 }
