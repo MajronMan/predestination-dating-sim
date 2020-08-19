@@ -1,0 +1,40 @@
+@import "../mixins/palette.scss";
+
+.Button {
+  background-color: $white;
+  color: $black;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer; 
+  outline: none;
+
+  &Primary {
+    border: 2px solid $primary;
+
+    &:hover {
+      background-color: $primary;
+      border-color: $white;
+    }
+
+    &:active {
+      background-color: $primaryDark;
+    }
+  }
+
+  &Secondary {
+    border: 2px solid $secondary;
+
+    &:hover {
+      background-color: $secondary;
+      border-color: $white;
+    }
+    
+    &:active {
+      background-color: $secondaryDark;
+    }
+  }
+}

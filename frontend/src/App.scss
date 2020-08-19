@@ -5,10 +5,10 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: $primary;
+  background-color: $grey;
   font-size: calc(10px + 2vmin);
-  color: $white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: $black;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .Link {
@@ -59,8 +59,4 @@
     transform: rotate(360deg);
   }
 }
-
-.LoginForm {
-  display: flex;
-  flex-direction: column;
-}
+ 

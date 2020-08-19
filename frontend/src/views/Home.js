@@ -2,6 +2,7 @@ import React from "react";
 
 import { FirebaseContext } from "../Firebase";
 import TopBar from "../elements/TopBar";
+import Button from "../components/Button";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -70,7 +71,7 @@ const FirebaseEnabledComponent = () => (
         <div>
           Test connection to firebase
           <div>
-            <button onClick={testFirebase(firebase.storage.ref())}>TEST</button>
+            <Button onClick={testFirebase(firebase.storage.ref())}>TEST</Button>
             <p id="firebaseResponse"></p>
           </div>
         </div>
@@ -85,7 +86,7 @@ const Home = () => (
     <div>
       Test connection to server
       <div>
-        <button onClick={testServer}>TEST</button>
+        <Button onClick={testServer}>TEST</Button>
         <p id="serverResponse"></p>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 .TopBar {
   width: 100%;
-  background: $secondary;
+  background: linear-gradient($primary, $secondary);
   padding: 2rem;
   display: flex;
   justify-content: space-around;
@@ -10,6 +10,10 @@
   &Links {
     display: flex;
     justify-content: space-around;
-    flex: 1;
   }
+
+  &Link {
+    margin: 0 1rem;
+  }
+ 
 }

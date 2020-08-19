@@ -8,13 +8,13 @@ import "./TopBar.scss";
 const TopBar = () => (
   <header className="TopBar">
     <nav className="TopBarLinks">
-      <NavLink to="/" className="Link">
+      <NavLink exact to="/" className="TopBarLink Link">
         Home
       </NavLink>
-      <NavLink to="/login" className="Link">
-        Login
+      <NavLink exact to="/register" className="TopBarLink Link">
+        Register
       </NavLink>
-      <NavLink to="/game" className="Link">
+      <NavLink exact to="/game" className="TopBarLink Link">
         Play
       </NavLink>
     </nav>

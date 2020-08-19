@@ -1,47 +1,47 @@
 import React from "react";
 import { connect } from "react-redux";
-import LoginForm from "../views/Login/Form";
+import CredentialsForm from "../components/CredentialsForm";
 import { FirebaseContext } from "../Firebase";
 
-import "./UserPanel.scss"
+import "./UserPanel.scss";
+import Button from "../components/Button";
+import { mkClassName } from "../utils/JSX";
 
 const mapStateToProps = ({ user }) => ({ user });
 
 class UserPanel extends React.Component {
-  state = { dropdownOpen: false };
-
-  renderDropdown = () => (
-    <div className="UserPanelDropdown">
-      <span>{this.props.user.email}</span>
-      <FirebaseContext.Consumer>
-        {(firebase) => <button onClick={firebase.logout}>Logout</button>}
-      </FirebaseContext.Consumer>
-    </div>
-  );
-
-  renderForm = () => (
-    <div className="UserPanelDropdown">
-      <LoginForm />
-    </div>
-  );
-
-  renderLoggedInPanel = () => {
-    if (!this.props.user) {
-      return null;
-    }
-    if (this.state.open) {
-      return this.renderDropdown();
-    }
-    return <button onClick={this.setState({ open: true })}>U</button>;
-  };
-
-  renderLoggedOutPanel = () => {};
+  state = { open: false };
 
   render() {
+    const { user } = this.props;
+    const { open } = this.state;
+
     return (
-      <div className="UserPanel">
-        {this.renderLoggedInPanel()}
-        {this.renderLoggedOutPanel()}
+      <div className={mkClassName("UserPanel", this.props.className)}>
+        <Button secondary onClick={() => this.setState({ open: !open })}>
+          {open ? "Close" : user ? "Account" : "Login"}
+        </Button>
+        <div className={mkClassName("UserPanelDropdown", !open && "inactive")}>
+          <FirebaseContext.Consumer>
+            {(firebase) => {
+              if (user) {
+                return (
+                  <div className="UserPanelDetails">
+                    <span>{user.email}</span>
+                    <Button
+                      className="UserPanelLogout"
+                      onClick={firebase.logout}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                );
+              } else {
+                return <CredentialsForm action={firebase.login} />;
+              }
+            }}
+          </FirebaseContext.Consumer>
+        </div>
       </div>
     );
   }

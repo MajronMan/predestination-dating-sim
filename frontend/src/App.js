@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import GameView from "./views/Game";
 import HomeView from "./views/Home";
-import LoginView from "./views/Login";
+import RegisterView from "./views/Register";
 import "./App.scss";
 
 const App = () => {
@@ -14,8 +14,8 @@ const App = () => {
           <Route path="/game">
             <GameView />
           </Route>
-          <Route path="/login">
-            <LoginView />
+          <Route path="/register">
+            <RegisterView />
           </Route>
           <Route path="/">
             <HomeView />
