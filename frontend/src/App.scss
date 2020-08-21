@@ -5,8 +5,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: $grey;
-  font-size: calc(10px + 2vmin);
+  background-color: $grey; 
   color: $black;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -18,7 +17,7 @@
 
 .Link:hover {
   transform: scale(1.1);
-  transition: all ease 0.2s;
+  transition: all ease 0.1s;
 }
 
 .Link.active {

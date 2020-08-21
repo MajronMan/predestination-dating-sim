@@ -1,6 +1,27 @@
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const TEST_SERVER = "TEST_SERVER";
+export const SERVER_RESPONSE = "SERVER_RESPONSE";
+export const SERVER_ERROR = "SERVER_ERROR";
+export const TEST_FIREBASE = "TEST_FIREBASE";
+export const FIREBASE_RESPONSE = "FIREBASE_RESPONSE";
+export const FIREBASE_ERROR = "FIREBASE_ERROR";
 
-export const userLogin = (user) => ({ type: USER_LOGIN, payload: user });
+export const mkAction = (type, payload) => ({ type, payload });
 
-export const userLogout = () => ({ type: USER_LOGOUT });
+export const userLogin = (user) => mkAction(USER_LOGIN, user);
+
+export const userLogout = () => mkAction(USER_LOGOUT);
+
+export const testServer = () => mkAction(TEST_SERVER);
+
+export const serverResponse = (response) => mkAction(SERVER_RESPONSE, response);
+
+export const serverError = (error) => mkAction(SERVER_ERROR, error);
+
+export const testFirebase = (storageRef) => mkAction(TEST_FIREBASE, storageRef);
+
+export const firebaseResponse = (response) =>
+  mkAction(FIREBASE_RESPONSE, response);
+
+export const firebaseError = (error) => mkAction(FIREBASE_ERROR, error);

@@ -1,78 +1,35 @@
-import React from "react"; 
+import React from "react";
 
 import { FirebaseContext } from "../Firebase";
 import TopBar from "../elements/TopBar";
 import Button from "../components/Button";
+import { connect } from "react-redux";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import { testServer, testFirebase } from "../store/actions";
 
-async function callHello() {
-  return fetch(`${backendUrl}/api/v1/hello`).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  });
-}
+const ResponseText = ({ response, error }) => (
+  <p
+    style={{
+      color: error && "red",
+      visibility: !error && !response && "hidden",
+      minHeight: "2rem",
+    }}
+  >
+    {response || `${error}`}
+  </p>
+);
 
-async function testServer() {
-  callHello()
-    .then(({ result }) => {
-      const el = document.getElementById("serverResponse");
-      if (el) {
-        el.innerText = result;
-        el.style.color = "";
-      }
-    })
-    .catch(() => {
-      const el = document.getElementById("serverResponse");
-      if (el) {
-        el.innerText = "ERROR";
-        el.style.color = "red";
-      }
-    });
-}
-
-const testFirebase = (storageRef) => () => {
-  callFirebase(storageRef);
-};
-
-async function callFirebase(storageRef) {
-  storageRef
-    .child("hello.txt")
-    .getDownloadURL()
-    .then((url) =>
-      fetch(url).then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.text();
-      })
-    )
-    .then((result) => {
-      const el = document.getElementById("firebaseResponse");
-      if (el) {
-        el.innerText = result;
-      }
-    })
-    .catch(() => {
-      const el = document.getElementById("firebaseResponse");
-      if (el) {
-        el.innerText = "ERROR";
-        el.style.color = "red";
-      }
-    });
-}
-
-const FirebaseEnabledComponent = () => (
+const FirebaseEnabledComponent = ({ response, error, testFirebase }) => (
   <FirebaseContext.Consumer>
-    {(firebase) => {
+    {(firebaseRef) => {
       return (
         <div>
-          Test connection to firebase
+          <h2>Test connection to firebase</h2>
           <div>
-            <Button onClick={testFirebase(firebase.storage.ref())}>TEST</Button>
-            <p id="firebaseResponse"></p>
+            <Button onClick={testFirebase(firebaseRef.storage.ref())}>
+              TEST
+            </Button>
+            <ResponseText response={response} error={error} />
           </div>
         </div>
       );
@@ -80,18 +37,32 @@ const FirebaseEnabledComponent = () => (
   </FirebaseContext.Consumer>
 );
 
-const Home = () => (
+const mapStateToProps = ({ backend, firebase }) => ({
+  backend,
+  firebase,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  testServer: () => dispatch(testServer()),
+  testFirebase: (storageRef) => () => dispatch(testFirebase(storageRef)),
+});
+
+const Home = ({ firebase, backend, testServer, testFirebase }) => (
   <div className="Home">
     <TopBar />
     <div>
-      Test connection to server
+      <h2>Test connection to server</h2>
       <div>
         <Button onClick={testServer}>TEST</Button>
-        <p id="serverResponse"></p>
+        <ResponseText response={backend.response} error={backend.error} />
       </div>
     </div>
-    <FirebaseEnabledComponent />
+    <FirebaseEnabledComponent
+      response={firebase.response}
+      error={firebase.error}
+      testFirebase={testFirebase}
+    />
   </div>
 );
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

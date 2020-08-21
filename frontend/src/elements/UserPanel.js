@@ -18,7 +18,7 @@ class UserPanel extends React.Component {
 
     return (
       <div className={mkClassName("UserPanel", this.props.className)}>
-        <Button secondary onClick={() => this.setState({ open: !open })}>
+        <Button secondary onClick={() => this.setState({ open: !open })} className="UserPanelButton">
           {open ? "Close" : user ? "Account" : "Login"}
         </Button>
         <div className={mkClassName("UserPanelDropdown", !open && "inactive")}>

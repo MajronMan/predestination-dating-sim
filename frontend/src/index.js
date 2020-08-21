@@ -1,19 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider as StoreProvider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
 
 import * as serviceWorker from "./serviceWorker";
 import Firebase, { FirebaseContext } from "./Firebase";
 import App from "./App";
 import reducers from "./store/reducers";
+import rootSaga from "./store/sagas";
 
 import "./index.css";
 
-const store = createStore(
-  reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMiddleware = createSagaMiddleware();
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
+
+const store = createStore(reducers, enhancer);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
