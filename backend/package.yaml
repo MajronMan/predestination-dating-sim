@@ -30,6 +30,7 @@ dependencies:
 - universum
 - warp
 - wai
+- selda
 - selda-postgresql
 - utf8-string
 - bytestring

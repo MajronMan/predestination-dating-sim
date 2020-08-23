@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0fbbb6e21978f1161f9a0079c34469a7794b37f508df59a5ffb5c49383301f99
+-- hash: e1819c513cece150c7d3ade53358bd5a5bd3f5bc460592aaed632ba06509551b
 
 name:           predestination-dating-sim-backend
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Database
       Lib
   other-modules:
       Paths_predestination_dating_sim_backend
@@ -37,6 +38,7 @@ library
       base >=4.7 && <5
     , bytestring
     , http-types
+    , selda
     , selda-postgresql
     , universum
     , utf8-string
@@ -57,6 +59,7 @@ executable predestination
     , bytestring
     , http-types
     , predestination-dating-sim-backend
+    , selda
     , selda-postgresql
     , universum
     , utf8-string
@@ -78,6 +81,7 @@ test-suite predestination-dating-sim-backend-test
     , bytestring
     , http-types
     , predestination-dating-sim-backend
+    , selda
     , selda-postgresql
     , universum
     , utf8-string
