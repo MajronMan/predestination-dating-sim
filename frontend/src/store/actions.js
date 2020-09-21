@@ -6,6 +6,9 @@ export const SERVER_ERROR = "SERVER_ERROR";
 export const TEST_FIREBASE = "TEST_FIREBASE";
 export const FIREBASE_RESPONSE = "FIREBASE_RESPONSE";
 export const FIREBASE_ERROR = "FIREBASE_ERROR";
+export const GET_DIALOGUE = "GET_DIALOGUE";
+export const GOT_DIALOGUE = "GOT_DIALOGUE";
+export const DIALOGUE_ERROR = "DIALOGUE_ERROR";
 
 export const mkAction = (type, payload) => ({ type, payload });
 
@@ -25,3 +28,9 @@ export const firebaseResponse = (response) =>
   mkAction(FIREBASE_RESPONSE, response);
 
 export const firebaseError = (error) => mkAction(FIREBASE_ERROR, error);
+
+export const getDialogue = (id) => mkAction(GET_DIALOGUE, id);
+
+export const gotDialogue = (dialogue) => mkAction(GOT_DIALOGUE, dialogue);
+
+export const dialogueError = (error) => mkAction(FIREBASE_ERROR, error);

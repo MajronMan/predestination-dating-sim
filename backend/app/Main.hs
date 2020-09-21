@@ -6,11 +6,10 @@ import Universum
 import Network.Wai.Handler.Warp
 
 import Lib 
-import Database
  
+main :: IO ()
 main = do
     let port = 8080
-    putStrLn $ "Listening on port " ++ show port
-    doStuff
+    putStrLn $ "Listening on port " ++ show port 
     run port app
  

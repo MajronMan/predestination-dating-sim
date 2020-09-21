@@ -1,19 +1,31 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getDialogue } from "../../store/actions";
+
 import "./DialogueBox.scss";
 
-const currentDialogue = {
-  question: "are you dumb, stupid or dumb?",
-  answers: ["I love yuo Belle", "Duck my sick", "Omae wa mou shindeiru"],
-};
+const mapStateToProps = ({ dialogue }) => ({
+  dialogue: dialogue.response,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getDialogue: () => dispatch(getDialogue("Faithful Encounter")),
+});
 
 class DialogueBox extends React.Component {
+  componentDidMount() {
+    this.props.getDialogue();
+    
+  }
   render() {
+    const {dialogue} = this.props
+    const st = (dialogue && dialogue._statements[0]) || {_text: "", _answers: []}
     return (
       <div className="container">
-        <p>{currentDialogue.question}</p>
+        <p>{st._text}</p>
         <div className="answers">
-          {currentDialogue.answers.map((a, i) => (
-            <p key={`dialogue_option_${i}`}>{">" + a}</p>
+          {st._answers.map((a, i) => (
+            <p key={`dialogue_option_${i}`}>{"> " + a._text}</p>
           ))}
         </div>
       </div>
@@ -21,4 +33,4 @@ class DialogueBox extends React.Component {
   }
 }
 
-export default DialogueBox;
+export default connect(mapStateToProps, mapDispatchToProps)(DialogueBox);

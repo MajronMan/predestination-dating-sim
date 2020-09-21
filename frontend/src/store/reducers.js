@@ -34,10 +34,22 @@ function firebase(state = { response: null, error: null }, action) {
   }
 }
 
+function dialogue(state = { response: null, error: null }, action) {
+  switch (action.type) {
+    case actions.GOT_DIALOGUE:
+      return { ...state, error: null, response: action.payload };
+    case actions.DIALOGUE_ERROR:
+      return { ...state, error: action.payload, response: null };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   user,
   backend,
-  firebase
+  firebase,
+  dialogue
 });
 
 export default rootReducer;

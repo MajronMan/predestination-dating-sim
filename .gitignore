@@ -1,6 +1,7 @@
 # backend
 .stack-work/
 *~
+*.cabal
 
 # dependencies
 node_modules

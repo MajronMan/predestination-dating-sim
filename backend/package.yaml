@@ -32,9 +32,13 @@ dependencies:
 - wai
 - selda
 - selda-postgresql
+- selda-json
 - utf8-string
 - bytestring
 - http-types
+- dotenv
+- aeson
+- containers
 
 library:
   source-dirs: src
