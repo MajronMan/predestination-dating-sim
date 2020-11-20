@@ -1,0 +1,1 @@
+Dialogue editor for dating sim games.
